@@ -17,16 +17,25 @@ searchBtn.addEventListener("click", async () => {
     return;
   }
 
+  if (seat && (seat < 1 || seat > 40)) {
+    alert("座號必須介於 1 到 40");
+    loading.style.display = "none";
+    return;
+  }
+
+
   const query = new URLSearchParams();
   query.append("class", className);
   if (date) query.append("date", date);
   if (seat) query.append("seat", seat);
 
+  searchBtn.disabled = true;
+  loading.style.display = "block";
+  resultArea.innerHTML = "";
+
   try {
     const res = await fetch("https://script.google.com/macros/s/AKfycbz3ZmiMW2Ei8QA8XCbLt_jgp1sDu232R2AfrEaWyyRHLMdpB3cqeuspeyMWfbpXAWeOAg/exec?" + query.toString());
     const data = await res.json();
-
-        searchBtn.disabled = true;
 
     if (data.length === 0) {
       resultArea.innerHTML = "<p>查無資料</p>";
@@ -48,7 +57,8 @@ searchBtn.addEventListener("click", async () => {
       });
 
       html += "</tbody></table>";
-      resultArea.innerHTML = html;
+
+      resultArea.innerHTML = `<p>查詢條件：班級：${className}、日期：${date || "全部"}、座號：${seat || "全部"}</p>` + html;
     }
   } catch (err) {
     resultArea.innerHTML = "<p style='color:red;'>查詢失敗：" + err.message + "</p>";
