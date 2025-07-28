@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>海青工商XX班 出席查詢系統</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <div class="container">
+    <h1>海青工商 XX班 出席查詢系統</h1>
+    <div class="search-group">
+      <label>班級：
+        <select id="classSelect">
+          <option value="">請選擇班級</option>
+          <option value="真班">真班</option>
+          <option value="善班">善班</option>
+        </select>
+      </label>
+      <label>日期：
+        <input type="date" id="dateInput" />
+      </label>
+      <label>座號：
+        <input type="number" id="seatInput" placeholder="輸入座號" min="1" max="40" />
+      </label>
+      <button id="searchBtn">查詢</button>
+    </div>
+  </div>
+
+  <div id="resultArea">
+    <p>請輸入條件查詢出勤紀錄</p>
+  </div>
+
+  <div id="loading" style="display:none;">
+    <p>查詢中... <span class="spinner"></span></p>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+
+</html>
