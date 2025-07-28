@@ -26,6 +26,8 @@ searchBtn.addEventListener("click", async () => {
     const res = await fetch("https://script.google.com/macros/s/AKfycbz3ZmiMW2Ei8QA8XCbLt_jgp1sDu232R2AfrEaWyyRHLMdpB3cqeuspeyMWfbpXAWeOAg/exec?" + query.toString());
     const data = await res.json();
 
+        searchBtn.disabled = true;
+
     if (data.length === 0) {
       resultArea.innerHTML = "<p>查無資料</p>";
     } else {
@@ -52,5 +54,6 @@ searchBtn.addEventListener("click", async () => {
     resultArea.innerHTML = "<p style='color:red;'>查詢失敗：" + err.message + "</p>";
   } finally {
     loading.style.display = "none";
+    searchBtn.disabled = false;
   }
 });
